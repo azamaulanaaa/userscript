@@ -10,7 +10,7 @@ export default defineConfig({
         name: "Vite Userscript",
         icon: "https://vitejs.dev/logo.svg",
         namespace: "npm/vite-plugin-monkey",
-        match: ["https://notion.so/"],
+        match: ["https://www.notion.so/*"],
       },
     }),
   ],
