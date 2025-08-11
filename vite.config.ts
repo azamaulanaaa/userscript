@@ -7,8 +7,8 @@ export default defineConfig({
     monkey({
       entry: "src/main.ts",
       userscript: {
-        name: "Vite Userscript",
-        icon: "https://vitejs.dev/logo.svg",
+        name: "Notion Enhance",
+        icon: "https://www.notion.so/images/favicon.ico",
         namespace: "npm/vite-plugin-monkey",
         match: ["https://www.notion.so/*"],
       },
