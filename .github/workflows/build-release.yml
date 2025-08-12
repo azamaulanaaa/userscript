@@ -31,7 +31,7 @@ jobs:
       # Sets up the Deno environment.
       # This will now use the latest patch release in the 2.4 series.
       - name: Setup Deno
-        uses: deno-land/setup-deno@v1
+        uses: deno-land/setup-deno@v2
         with:
           deno-version: 2.4.x # Uses the latest 2.4.x patch release
 
