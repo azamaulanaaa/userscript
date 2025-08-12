@@ -1,0 +1,64 @@
+# .github/workflows/release.yml
+# This workflow builds a Vite project using Deno and creates a GitHub Release,
+# uploading the build artifacts as individual files.
+
+name: Build and Release
+
+# This workflow is triggered on pushes to the repository that include a new tag
+# following a semantic versioning pattern, like v1.0.0, v1.2.3, etc.
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+# Sets the permissions for the GITHUB_TOKEN to allow creating releases.
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build and Release
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # --- 1. Setup Environment ---
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Sets up the Deno environment.
+      # This will now use the latest patch release in the 2.4 series.
+      - name: Setup Deno
+        uses: deno-land/setup-deno@v1
+        with:
+          deno-version: 2.4.x # Uses the latest 2.4.x patch release
+
+      # --- 2. Build Project ---
+
+      # Caches Deno dependencies to speed up subsequent builds.
+      # It uses the hash of the lock file as the cache key.
+      - name: Cache Deno dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.deno
+          key: ${{ runner.os }}-deno-${{ hashFiles('**/deno.lock') }}
+
+      # Runs the build command defined in your deno.json or deno.jsonc file.
+      # This assumes you have a "build" task like: "vite build"
+      - name: Build Vite project
+        run: deno task build
+
+      # --- 3. Create Release ---
+
+      # Creates a new GitHub Release and uploads the build artifacts.
+      # This action uses the tag that triggered the workflow as the release name.
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          # The 'files' input accepts a glob pattern.
+          # This pattern tells the action to find all files and directories
+          # inside the 'dist' folder and upload them as individual assets
+          # to the release, rather than creating a single zip file.
+          files: dist/*
