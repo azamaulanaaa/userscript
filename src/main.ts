@@ -1,4 +1,5 @@
 import { waitElement } from "./dom.ts";
+import { TIMEOUT } from "./ui/constant.ts";
 import { Export } from "./ui/export.ts";
 import { MoreMenu, Topbar } from "./ui/more_menu.ts";
 
@@ -20,6 +21,7 @@ await (async () => {
   const share_button = await waitElement(
     "div:has(> div > .notion-topbar-share-menu)",
     topbar,
+    TIMEOUT,
   );
 
   const export_button = share_button.cloneNode(true);
