@@ -13,7 +13,10 @@ export default defineConfig({
   },
   plugins: [
     monkey({
-      entry: "src/main.ts",
+      entry: "src/entry/notion.ts",
+      build: {
+        fileName: "notion.user.js",
+      },
       userscript: {
         name: "Notion Enhance",
         icon: "https://www.notion.so/images/favicon.ico",
