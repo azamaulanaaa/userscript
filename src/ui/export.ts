@@ -1,9 +1,7 @@
 import { observeElement, waitElement } from "@/dom.ts";
 import { setInput } from "@/react.ts";
 import { Root } from "@/ui/root.ts";
-
-const TIMEOUT = 60_000;
-const SLEEP_CLICK = 100;
+import { SLEEP_CLICK, TIMEOUT } from "@/ui/constant.ts";
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));

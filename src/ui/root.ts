@@ -1,6 +1,5 @@
 import { waitElement } from "@/dom.ts";
-
-const TIMEOUT = 60_000;
+import { TIMEOUT } from "@/ui/constant.ts";
 
 export async function Root() {
   const root = await waitElement("div#notion-app", document.body, TIMEOUT);
