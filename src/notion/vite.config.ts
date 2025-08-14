@@ -11,6 +11,9 @@ export default defineConfig({
       "@": resolve(__dirname, "../"),
     },
   },
+  build: {
+    outDir: "dist/notion/",
+  },
   plugins: [
     monkey({
       entry: "@/notion/main.ts",
