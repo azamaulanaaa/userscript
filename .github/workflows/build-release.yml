@@ -57,8 +57,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          # The 'files' input accepts a glob pattern.
-          # This pattern tells the action to find all files and directories
-          # inside the 'dist' folder and upload them as individual assets
-          # to the release, rather than creating a single zip file.
-          files: dist/*
+          # This recursive glob pattern finds all files in 'dist'
+          # and all of its subdirectories.
+          files: dist/**/*
