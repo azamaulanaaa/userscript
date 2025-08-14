@@ -1,7 +1,7 @@
-import { waitElement } from "@/dom.ts";
-import { TIMEOUT } from "@/ui/constant.ts";
-import { Export } from "@/ui/export.ts";
-import { MoreMenu, Topbar } from "@/ui/more_menu.ts";
+import { waitElement } from "@/lib/dom.ts";
+import { TIMEOUT } from "@/notion/ui/constant.ts";
+import { Export } from "@/notion/ui/export.ts";
+import { MoreMenu, Topbar } from "@/notion/ui/more_menu.ts";
 
 async function PDFExport() {
   await MoreMenu("Export");

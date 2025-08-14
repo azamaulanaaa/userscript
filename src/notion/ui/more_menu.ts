@@ -1,6 +1,6 @@
-import { observeElement, waitElement } from "@/dom.ts";
-import { Overlay, Root } from "@/ui/root.ts";
-import { SLEEP_CLICK, TIMEOUT } from "@/ui/constant.ts";
+import { observeElement, waitElement } from "@/lib/dom.ts";
+import { Overlay, Root } from "@/notion/ui/root.ts";
+import { SLEEP_CLICK, TIMEOUT } from "@/notion/ui/constant.ts";
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));

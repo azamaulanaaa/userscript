@@ -1,7 +1,7 @@
-import { observeElement, waitElement } from "@/dom.ts";
-import { setInput } from "@/react.ts";
-import { Root } from "@/ui/root.ts";
-import { SLEEP_CLICK, TIMEOUT } from "@/ui/constant.ts";
+import { observeElement, waitElement } from "@/lib/dom.ts";
+import { setInput } from "@/lib/react.ts";
+import { Root } from "@/notion/ui/root.ts";
+import { SLEEP_CLICK, TIMEOUT } from "@/notion/ui/constant.ts";
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
