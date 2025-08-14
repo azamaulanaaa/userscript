@@ -24,5 +24,16 @@ export default defineConfig({
         match: ["https://www.notion.so/*"],
       },
     }),
+    monkey({
+      entry: "src/coretax/main.ts",
+      build: {
+        fileName: "coretax.user.js",
+      },
+      userscript: {
+        name: "Coretax Enhance",
+        namespace: "npm/vite-plugin-monkey",
+        match: ["https://coretaxdjp.pajak.go.id/*"],
+      },
+    }),
   ],
 });
