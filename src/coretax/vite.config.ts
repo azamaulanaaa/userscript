@@ -8,24 +8,12 @@ const __dirname = dirname(fromFileUrl(import.meta.url));
 export default defineConfig({
   resolve: {
     alias: {
-      "@": resolve(__dirname, "./src"),
+      "@": resolve(__dirname, "../"),
     },
   },
   plugins: [
     monkey({
-      entry: "src/notion/main.ts",
-      build: {
-        fileName: "notion.user.js",
-      },
-      userscript: {
-        name: "Notion Enhance",
-        icon: "https://www.notion.so/images/favicon.ico",
-        namespace: "npm/vite-plugin-monkey",
-        match: ["https://www.notion.so/*"],
-      },
-    }),
-    monkey({
-      entry: "src/coretax/main.ts",
+      entry: "@/coretax/main.ts",
       build: {
         fileName: "coretax.user.js",
       },
