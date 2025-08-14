@@ -9,7 +9,7 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
 
 # Sets the permissions for the GITHUB_TOKEN to allow creating releases.
 permissions:
