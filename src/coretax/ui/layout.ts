@@ -3,7 +3,7 @@ import { waitElement } from "@/lib/dom.ts";
 
 export async function Main() {
   const main = await waitElement(
-    "ui-coretax-one-column-layout",
+    ".main-content",
     document.body,
     TIMEOUT,
   );
