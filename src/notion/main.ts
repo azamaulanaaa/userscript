@@ -8,7 +8,7 @@ async function PDFExport() {
   await Export({
     export_format: "PDF",
     include_databases: "Current view",
-    include_content: "No files or images",
+    include_content: "Everything",
     page_format: "A4",
     scale_percent: 80,
     execute: true,
