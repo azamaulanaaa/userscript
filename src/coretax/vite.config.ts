@@ -11,6 +11,9 @@ export default defineConfig({
       "@": resolve(__dirname, "../"),
     },
   },
+  build: {
+    outDir: "dist/coretax",
+  },
   plugins: [
     monkey({
       entry: "src/coretax/main.ts",

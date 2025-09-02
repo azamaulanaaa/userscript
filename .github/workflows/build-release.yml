@@ -61,4 +61,4 @@ jobs:
           # This pattern tells the action to find all files and directories
           # inside the 'dist' folder and upload them as individual assets
           # to the release, rather than creating a single zip file.
-          files: dist/*
+          files: dist/**/*.user.js
