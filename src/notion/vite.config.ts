@@ -13,7 +13,7 @@ export default defineConfig({
   },
   plugins: [
     monkey({
-      entry: "@/notion/main.ts",
+      entry: "src/notion/main.ts",
       build: {
         fileName: "notion.user.js",
       },

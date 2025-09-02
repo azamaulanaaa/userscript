@@ -13,7 +13,7 @@ export default defineConfig({
   },
   plugins: [
     monkey({
-      entry: "@/coretax/main.ts",
+      entry: "src/coretax/main.ts",
       build: {
         fileName: "coretax.user.js",
       },
