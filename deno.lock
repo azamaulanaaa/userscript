@@ -5,9 +5,11 @@
     "jsr:@std/internal@^1.0.6": "1.0.10",
     "jsr:@std/internal@^1.0.9": "1.0.10",
     "jsr:@std/path@^1.1.1": "1.1.1",
+    "npm:jquery@^3.7.1": "3.7.1",
     "npm:vite-plugin-monkey@^6.0.1": "6.0.1_vite@7.1.1__picomatch@4.0.3",
     "npm:vite@*": "7.1.1_picomatch@4.0.3",
-    "npm:vite@^7.1.1": "7.1.1_picomatch@4.0.3"
+    "npm:vite@^7.1.1": "7.1.1_picomatch@4.0.3",
+    "npm:zod@^4.1.11": "4.1.11"
   },
   "jsr": {
     "@std/assert@1.0.13": {
@@ -426,6 +428,9 @@
     "isexe@2.0.0": {
       "integrity": "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw=="
     },
+    "jquery@3.7.1": {
+      "integrity": "sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg=="
+    },
     "magic-string@0.30.17": {
       "integrity": "sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==",
       "dependencies": [
@@ -602,14 +607,19 @@
       "dependencies": [
         "cuint"
       ]
+    },
+    "zod@4.1.11": {
+      "integrity": "sha512-WPsqwxITS2tzx1bzhIKsEs19ABD5vmCVa4xBo2tq/SrV4RNZtfws1EnCWQXM6yh8bD08a1idvkB5MZSBiZsjwg=="
     }
   },
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
       "jsr:@std/path@^1.1.1",
+      "npm:jquery@^3.7.1",
       "npm:vite-plugin-monkey@^6.0.1",
-      "npm:vite@^7.1.1"
+      "npm:vite@^7.1.1",
+      "npm:zod@^4.1.11"
     ]
   }
 }
