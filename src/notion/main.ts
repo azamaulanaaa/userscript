@@ -25,7 +25,7 @@ await (async () => {
   );
 
   const export_button = share_button.cloneNode(true);
-  export_button.firstChild!.firstChild!.firstChild!.innerText! = "Export";
+  export_button.firstChild!.firstChild!.innerText! = "Export";
   export_button.firstChild!.addEventListener("click", PDFExport);
   share_button.parentNode?.insertBefore(
     export_button,
