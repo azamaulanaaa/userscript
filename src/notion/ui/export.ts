@@ -9,7 +9,7 @@ function sleep(ms: number): Promise<void> {
 
 export type BaseExportForm = {
   include_databases?: "Current view" | "Default View";
-  include_content?: "Everything" | "No files or images";
+  include_content?: "Everything" | "Exclude files and images";
   include_subpages?: boolean;
   create_folders_for_subpages?: boolean;
   execute?: boolean;
@@ -109,11 +109,11 @@ export async function Export(form: ExportForm) {
   const export_format_input = await findInput("Export format");
   await setInputDropdown(export_format_input, form.export_format);
   if (form.include_databases) {
-    const include_databases_input = await findInput("Include databases");
+    const include_databases_input = await findInput("Database views");
     await setInputDropdown(include_databases_input, form.include_databases);
   }
   if (form.include_content) {
-    const include_content_input = await findInput("Include content");
+    const include_content_input = await findInput("Page content");
     await setInputDropdown(include_content_input, form.include_content);
   }
   if (form.include_subpages !== undefined) {
