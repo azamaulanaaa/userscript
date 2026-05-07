@@ -16,7 +16,11 @@
     "build:notion": "deno run -A vite build --config ./src/notion/vite.config.ts",
     "preview:notion": "deno run -A vite preview --config ./src/notion/vite.config.ts",
 
-    "build": "deno task build:coretax && deno task build:notion"
+    "dev:joss": "deno run -A vite --config ./src/joss/vite.config.ts",
+    "build:joss": "deno run -A vite build --config ./src/joss/vite.config.ts",
+    "preview:joss": "deno run -A vite preview --config ./src/joss/vite.config.ts",
+
+    "build": "deno task build:coretax && deno task build:notion && deno task build:joss"
   },
   "imports": {
     "@/": "./src/",
