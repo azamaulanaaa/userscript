@@ -1,0 +1,35 @@
+{
+  "name": "userscript",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.13.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:joss": "vite --config ./src/joss/vite.config.ts",
+    "build:joss": "vite build --config ./src/joss/vite.config.ts",
+    "preview:joss": "vite preview --config ./src/joss/vite.config.ts",
+    "dev:dpmptsp": "vite --config ./src/dpmptsp/vite.config.ts",
+    "build:dpmptsp": "vite build --config ./src/dpmptsp/vite.config.ts",
+    "preview:dpmptsp": "vite preview --config ./src/dpmptsp/vite.config.ts",
+    "build": "npm run build:joss && npm run build:dpmptsp",
+    "dev": "npm run dev:joss",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.32",
+    "@types/node": "^26.4.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.1",
+    "vite-plugin-monkey": "^6.0.1"
+  }
+}
