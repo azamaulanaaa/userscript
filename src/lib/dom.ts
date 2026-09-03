@@ -1,72 +1,82 @@
-/**
- * waits for a specific element to appear in the root
- *
- * @param selectors CSS selector for element to wait for relative to root
- * @param root container element that observered for changes
- * @param timeout the maximum time to wait in miliseconds
- * @returns a promise that resolve with the element when it is found
- */
-export async function waitElement<
-  T extends HTMLElement = HTMLElement,
-  K extends HTMLElement = HTMLElement,
->(
-  selectors: string,
-  root: K = document.body,
-  timeout: number = 1_000,
-): Promise<T> {
-  return await observeElement<T, K>(
-    (root, resolve) => {
-      const element = root.querySelector<T>(selectors);
-      if (element) {
-        resolve(element);
-        return;
-      }
-    },
-    root,
-    timeout,
-    {
-      childList: true,
-      subtree: true,
-    },
-  );
+export interface ObserveOptions extends MutationObserverInit {
+  timeout?: number;
 }
 
 /**
- * observe an element
- *
- * @param callback function to do something given a state
- * @param root container element that observered for changes
- * @param timeout maximum time to wait in miliseconds
- * @param option observer option
- * @returns a promise that resolve with the element when it is found
+ * Observe the DOM and resolve when callback signals.
+ * Cleanly handles timeout + disconnect lifecycle.
  */
 export function observeElement<T, K extends HTMLElement = HTMLElement>(
   callback: (root: K, resolve: (result: T) => void) => void,
-  root: K = document.body,
-  timeout: number = 1_000,
-  option: MutationObserverInit = {},
+  root: K = document.body as unknown as K,
+  timeout = 1_000,
+  options: MutationObserverInit = {},
 ): Promise<T> {
   return new Promise((resolve, reject) => {
-    let observer: undefined | MutationObserver;
+    let observer: MutationObserver | undefined;
 
     const timeoutId = setTimeout(() => {
       observer?.disconnect();
-      reject(
-        new Error(`Element not found within ${timeout}ms.`),
-      );
+      reject(new Error(`Element not found within ${timeout}ms.`));
     }, timeout);
 
-    const callback_resolve = (result: T) => {
+    const done = (result: T) => {
       clearTimeout(timeoutId);
       observer?.disconnect();
       resolve(result);
     };
 
-    observer = new MutationObserver(
-      () => callback(root, callback_resolve),
-    );
-    observer.observe(root, option);
-
-    callback(root, callback_resolve);
+    observer = new MutationObserver(() => callback(root, done));
+    observer.observe(root as unknown as Element, options);
+    callback(root, done);
   });
+}
+
+/**
+ * Wait for an element matching selector to appear under root.
+ */
+export function waitElement<
+  T extends HTMLElement = HTMLElement,
+  K extends HTMLElement = HTMLElement,
+>(
+  selector: string,
+  root: K = document.body as unknown as K,
+  timeout = 1_000,
+): Promise<T> {
+  return observeElement<T, K>(
+    (r, resolve) => {
+      const el = (r as unknown as Element).querySelector<T>(selector);
+      if (el) resolve(el);
+    },
+    root,
+    timeout,
+    { childList: true, subtree: true },
+  );
+}
+
+/**
+ * Create and submit a hidden POST form from URLSearchParams.
+ * Useful for converting GET query params to POST (e.g. JOSS tracker).
+ */
+export function submitAsPostForm(
+  targetUrl: string,
+  params: URLSearchParams,
+  target: HTMLElement = document.body,
+): HTMLFormElement {
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = targetUrl;
+  form.style.display = "none";
+
+  for (const [key, value] of params) {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = key;
+    input.value = value;
+    form.appendChild(input);
+  }
+
+  target.appendChild(form);
+  form.submit();
+  return form;
 }

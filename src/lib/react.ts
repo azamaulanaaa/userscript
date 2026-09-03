@@ -1,33 +1,29 @@
-export function setInput<
-  T extends HTMLInputElement,
->(
+/**
+ * Programmatically set a React-controlled input value
+ * by leveraging React's internal _valueTracker.
+ */
+export function setInput<T extends HTMLInputElement>(
   input: T,
   value: string | boolean,
-) {
-  return new Promise<void>((resolve, reject) => {
-    let lastValue: typeof value;
-    let event_name: string;
+): void {
+  let lastValue: string | boolean;
+  let eventName: string;
 
-    if (typeof value === "string") {
-      lastValue = input.value;
-      event_name = "input";
-      input.value = value;
-    } else if (typeof value === "boolean") {
-      lastValue = input.checked;
-      event_name = "click";
-      input.checked = value;
-    }
+  if (typeof value === "string") {
+    lastValue = input.value;
+    eventName = "input";
+    input.value = value;
+  } else {
+    lastValue = input.checked;
+    eventName = "click";
+    input.checked = value;
+  }
 
-    if (!Object.hasOwn(input, "_valueTracker")) {
-      reject(new Error('"_valueTracker" does not exist'));
-      return;
-    }
-    // @ts-ignore react way to set previous value
-    input._valueTracker?.setValue(lastValue);
+  const tracker = (input as unknown as Record<string, { setValue(v: unknown): void }>)["_valueTracker"];
+  if (!tracker) {
+    throw new Error('"_valueTracker" does not exist — is this a React input?');
+  }
+  tracker.setValue(lastValue);
 
-    const event = new Event(event_name, { bubbles: true });
-    input.dispatchEvent(event);
-
-    resolve();
-  });
+  input.dispatchEvent(new Event(eventName, { bubbles: true }));
 }
